@@ -1,69 +1,60 @@
 package br.com.quixada.model;
 
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+
+@Entity
 public class Usuario {
-	private String idUsuario;
+	@Column
 	private String name;
-	private String sexo;
+	@Id
+	@Column
 	private String email;
-	private String nascimento;
-	private ArrayList<Denuncia> denuncias; 
 	
+	@Column
+	private String senha;
 	
 	public Usuario() {
 		super();
 	}
-	public Usuario(String name, String sexo, String email, String nascimento) {
+
+	public Usuario(String name, String email, String senha) {
 		super();
 		this.name = name;
-		this.sexo = sexo;
 		this.email = email;
-		this.nascimento = nascimento;
+		this.senha = senha;
 	}
-	
-	
-	public ArrayList<Denuncia> getDenuncias() {
-		return denuncias;
-	}
-	public void setDenuncias(ArrayList<Denuncia> denuncias) {
-		this.denuncias = denuncias;
-	}
-	public String getIdUsuario() {
-		return idUsuario;
-	}
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
-	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSexo() {
-		return sexo;
-	}
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getNascimento() {
-		return nascimento;
+
+	public String getSenha() {
+		return senha;
 	}
-	public void setNascimento(String nascimento) {
-		this.nascimento = nascimento;
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
+
 	@Override
 	public String toString() {
-		return "Usuario [idUsuario=" + idUsuario + ", name=" + name + ", sexo="
-				+ sexo + ", email=" + email + ", nascimento=" + nascimento
-				+ ", denuncias=" + denuncias + "]";
+		return "Usuario [name=" + name + ", email=" + email + ", senha="
+				+ senha + "]";
 	}
 	
 	
