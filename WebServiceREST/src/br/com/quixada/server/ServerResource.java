@@ -1,16 +1,22 @@
 package br.com.quixada.server;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-
-import com.google.gson.Gson;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import br.com.quixada.dao.UsuarioDAO;
 import br.com.quixada.dao.impl.UsuarioJPADAO;
 import br.com.quixada.model.Usuario;
 import br.com.quixada.util.JPAUtil;
+import com.sun.jersey.json.impl.provider.entity.JSONJAXBElementProvider;
+import com.sun.jersey.json.impl.provider.entity.JSONRootElementProvider;
+import com.sun.jersey.json.impl.provider.entity.JSONListElementProvider;
+import com.google.gson.Gson;
 
 @Path("/server")
 public class ServerResource {
@@ -45,14 +51,17 @@ public class ServerResource {
 		return "Deletado com sucesso";
 	}
 
-	@GET
-    @Path("inserir/{name}/{email}/{senha}")
-    @Produces("application/json")
-    public String inserirUsuario(@PathParam("name") String name, @PathParam("email") String email, @PathParam("senha") String senha){
-		System.out.println(name + "! !"+senha +"! !"+ email);
+	@POST
+	@Path("/inserir")
+    @Consumes("application/json")
+    public Response inserirUsuario(Usuario usuario){
+		System.out.println(usuario.getName() + "! !"+usuario.getEmail() +"! !"+ usuario.getSenha());
 		usd.beginTransaction();
-    	usd.save(new Usuario(name, email, senha));
+    	usd.save(usuario);
     	usd.close();
-    	return new Usuario(name, email, senha).toString();
+    	return Response.status(201).entity(usuario.getEmail()).build();
     }
 }
+//@PathParam("name") String name, @PathParam("email") String email, @PathParam("senha") String senha
+//@Produces(MediaType.APPLICATION_JSON)
+//@Path("inserir/{name}/{email}/{senha}")

@@ -3,6 +3,7 @@ package br.com.quixada.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Entity
